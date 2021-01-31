@@ -2,9 +2,9 @@ import React from "react";
 
 class Animals extends React.Component {
 
-/**
- * List all animals from avaiable users, sorted alphabeticaly
- */
+  /**
+   * List all animals from avaiable users, sorted alphabeticaly
+   */
   _list = () => {
     let animals = []
     let users = JSON.parse(window.sessionStorage.getItem('users'))

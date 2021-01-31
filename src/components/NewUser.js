@@ -1,22 +1,35 @@
 import React from "react";
 
 class NewUser extends React.Component {
-
   /**
    * Get data from the user form for create a new user
    */
-  _addForm = () => <form className="form" onSubmit={this.add}>
-    <label htmlFor="name">Name</label>
-    <input type="text" name="name" id="newuser-givenName" placeholder="Given name" />
-    <input type="text" id="newuser-surname" placeholder="Surname" />
-    <label htmlFor="age">Age</label>
-    <input type="text" name="age" id="newuser-age" placeholder="Age" />
-    <label htmlFor="points">Points</label>
-    <input type="text" name="points" id="newuser-points" placeholder="Points" />
-    <label htmlFor="animals">Animals <em>(One per line)</em></label>
-    <textarea name="animals" id="newuser-animals"></textarea>
-    <input type="submit" value="Add new user" />
-  </form>;
+  _addForm = () => (
+    <form className="form" onSubmit={this.add}>
+      <label htmlFor="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="newuser-givenName"
+        placeholder="Given name"
+      />
+      <input type="text" id="newuser-surname" placeholder="Surname" />
+      <label htmlFor="age">Age</label>
+      <input type="text" name="age" id="newuser-age" placeholder="Age" />
+      <label htmlFor="points">Points</label>
+      <input
+        type="text"
+        name="points"
+        id="newuser-points"
+        placeholder="Points"
+      />
+      <label htmlFor="animals">
+        Animals <em>(One per line)</em>
+      </label>
+      <textarea name="animals" id="newuser-animals"></textarea>
+      <input type="submit" value="Add new user" />
+    </form>
+  );
   get addForm() {
     return this._addForm;
   }
@@ -30,7 +43,8 @@ class NewUser extends React.Component {
    */
   _makeid = (l = 24) => {
     var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for (var i = 0; i < l; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -49,23 +63,23 @@ class NewUser extends React.Component {
    * @param {event} e event from the form
    */
   _add = (e) => {
-    e.preventDefault()
-    let users = JSON.parse(window.sessionStorage.getItem('users'));
-    let animals = document.querySelector('#newuser-animals').value.split('\n')
+    e.preventDefault();
+    let users = JSON.parse(window.sessionStorage.getItem("users"));
+    let animals = document.querySelector("#newuser-animals").value.split("\n");
     if (animals[0]) {
       users.push({
-        "id": this.makeid(),
-        "name": {
-          "given": document.querySelector('#newuser-givenName').value,
-          "surname": document.querySelector('#newuser-surname').value
+        id: this.makeid(),
+        name: {
+          given: document.querySelector("#newuser-givenName").value,
+          surname: document.querySelector("#newuser-surname").value,
         },
-        "points": document.querySelector('#newuser-points').value,
-        "animals": animals,
-        "isActive": true,
-        "age": document.querySelector('#newuser-age').value
-      })
-      window.sessionStorage.setItem('users', JSON.stringify(users));
-      this.props.clickHandler('animals', this.props.animal, this.props.limit)
+        points: document.querySelector("#newuser-points").value,
+        animals: animals,
+        isActive: true,
+        age: document.querySelector("#newuser-age").value,
+      });
+      window.sessionStorage.setItem("users", JSON.stringify(users));
+      this.props.clickHandler("animals", this.props.animal, this.props.limit);
     }
   };
   get add() {
@@ -76,9 +90,7 @@ class NewUser extends React.Component {
   }
 
   render() {
-    return (
-      this.addForm()
-    )
+    return this.addForm();
   }
 }
 
